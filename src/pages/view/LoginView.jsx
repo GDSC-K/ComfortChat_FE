@@ -13,6 +13,7 @@ function LoginView() {
         </Link>
         <img src={mainLogo} />
       </div>
+      <p id="email">이메일 주소</p>
     </div>
   );
 }

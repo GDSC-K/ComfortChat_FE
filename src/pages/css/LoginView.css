@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+.App {
+  width: 375px;
+  height: 100vh;
+  background-color: #edf1d6;
+  margin: 0 auto;
+}
+.container {
+  width: 325px;
+  background: #edf1d6;
+  margin: 0 auto;
+}
+p#email {
+  display: flex;
+  width: 118px;
+  height: 27px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #000;
+  font-family: Comfortaa;
+  font-size: 13.55px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 20.325px */
+  letter-spacing: -0.298px;
+}
