@@ -8,10 +8,9 @@ function VoiceChat() {
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
-  const [disabled, setDisabled] = useState(true); // 😀😀😀
-
+  const [disabled, setDisabled] = useState(true);
   const onRecAudio = () => {
-    setDisabled(true); // 😀😀😀
+    setDisabled(true);
 
     // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -81,24 +80,22 @@ function VoiceChat() {
     }
 
     // File 생성자를 사용해 파일로 변환
-    const sound = new File([audioUrl], 'soundBlob', {
+    const sound = new File([audioUrl], 'soundBlob.mp3', {
       lastModified: new Date().getTime(),
-      type: 'audio',
+      type: 'audio/mp3',
     });
 
-    // 😀😀😀
     setDisabled(false);
     console.log(sound); // File 정보 출력
   };
 
   const play = () => {
-    const audio = new Audio(URL.createObjectURL(audioUrl)); // 😀😀😀
+    const audio = new Audio(URL.createObjectURL(audioUrl));
     audio.loop = false;
     audio.volume = 1;
     audio.play();
   };
 
-  // 😀😀😀
   return (
     <>
       <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
