@@ -10,6 +10,7 @@
   margin: 0 auto;
 }
 img#backIcon {
+  margin-top: 15px;
   width: 24px;
   height: 24px;
   flex-shrink: 0;

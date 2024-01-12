@@ -11,7 +11,7 @@
   background: #edf1d6;
   margin: 0 auto;
 }
-p#email {
+p.email {
   display: flex;
   width: 118px;
   height: 27px;
@@ -19,10 +19,40 @@ p#email {
   justify-content: center;
   flex-shrink: 0;
   color: #000;
-  font-family: Comfortaa;
-  font-size: 13.55px;
+  font-family: inherit;
+  font-size: 18.55px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%; /* 20.325px */
   letter-spacing: -0.298px;
+  margin-left: 25px;
+  margin-top: 40px;
+}
+.bottom {
+  background: #edf1d6;
+  margin-left: 25px;
+  margin-top: 20px;
+  border: none;
+  border-bottom: 2px solid #000000;
+  width: 325px;
+}
+.loginButton {
+  width: 325px;
+  height: 70px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #609966;
+  margin-left: 25px;
+  margin-top: 38px;
+  color: #fff;
+  text-align: center;
+  font-family: Comfortaa;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 36px */
+  letter-spacing: -0.528px;
+}
+#signup {
+  margin-top: 20px;
 }

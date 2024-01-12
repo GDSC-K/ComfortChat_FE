@@ -13,7 +13,14 @@ function LoginView() {
         </Link>
         <img src={mainLogo} />
       </div>
-      <p id="email">이메일 주소</p>
+      <p className="email">이메일 주소</p>
+      <input type="text" className="bottom" />
+      <p className="email">비밀번호</p>
+      <input type="text" className="bottom" />
+      <button className="loginButton">로그인</button>
+      <button className="loginButton" id="signup">
+        가입하러 가기
+      </button>
     </div>
   );
 }
