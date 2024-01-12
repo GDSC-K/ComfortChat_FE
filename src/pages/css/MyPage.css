@@ -19,7 +19,7 @@ p#twoIcon {
   position: absolute;
   bottom: 0;
 }
-input {
+.input {
   width: 260px;
   height: 56px;
   padding-left: 10px;
