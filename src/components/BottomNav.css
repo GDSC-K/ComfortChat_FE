@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 
-.Nav-Wrap > div {
+.Nav-Wrap div {
   text-align: center;
   float: left;
   width: 33%;

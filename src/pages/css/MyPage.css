@@ -43,11 +43,3 @@ input {
   margin-right: auto;
   margin-top: 15px;
 }
-.recentList {
-  width: 325px;
-  height: 59px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #000;
-  background: #9dc08b;
-}

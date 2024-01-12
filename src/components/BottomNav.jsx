@@ -6,19 +6,26 @@ import History from '../assets/icons/icon-book.png';
 import CheckedHistory from '../assets/icons/icon-book-fill.png';
 import MyPage from '../assets/icons/icon-person.png';
 import CheckedMyPage from '../assets/icons/icon-person-fill.png';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const BottomNav = () => {
   return (
     <nav className="Nav-Wrap">
-      <div className="Nav-Icon">
-        <img src={History} />
-      </div>
-      <div className="Nav-Icon">
-        <img src={Home} />
-      </div>
-      <div className="Nav-Icon">
-        <img src={MyPage} />
-      </div>
+      <Link to="/recentView" style={{ textDecoration: 'none' }}>
+        <div className="Nav-Icon">
+          <img src={History} />
+        </div>
+      </Link>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <div className="Nav-Icon">
+          <img src={Home} />
+        </div>
+      </Link>
+      <Link to="/login" style={{ textDecoration: 'none' }}>
+        <div className="Nav-Icon">
+          <img src={MyPage} />
+        </div>
+      </Link>
     </nav>
   );
 };
