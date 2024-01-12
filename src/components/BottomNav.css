@@ -1,0 +1,21 @@
+.Nav-Wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+}
+
+nav {
+  overflow: hidden;
+  border-top: 2px sold grey;
+}
+
+.Nav-Wrap > div {
+  text-align: center;
+  float: left;
+  width: 33%;
+
+  height: 80px;
+  line-height: 80px;
+}
