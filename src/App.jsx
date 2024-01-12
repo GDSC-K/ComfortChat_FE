@@ -2,7 +2,6 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import MainView from './pages/view/MainView';
 import TextChat from './pages/view/TextChat';
 import VoiceChat from './pages/view/VoiceChat';
-import BottomNav from './components/BottomNav';
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         {/* <음성 /> */}
         <Route path="/voiceChat" element={<VoiceChat />} />
       </Routes>
-      <BottomNav />
     </BrowserRouter>
   );
 }
