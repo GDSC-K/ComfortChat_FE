@@ -1,6 +1,8 @@
 import '../css/MainView.css';
 import mainLogo from '../../assets/images/image-main-resize.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import BottomNav from '../../components/BottomNav.jsx';
+
 function MainView() {
   return (
     <div className="App">
@@ -16,6 +18,7 @@ function MainView() {
             <p className="voice">음성으로 물어보기</p>
           </div>
         </Link>
+        <BottomNav />
       </div>
     </div>
   );
