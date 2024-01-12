@@ -48,7 +48,11 @@ const TextChat = () => {
   return (
     <div className="App">
       <div className="chat-box">
-        <h1>Comfort Chat</h1>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div className="back-button">
+            <img src={backIcon} />
+          </div>
+        </Link>
         <MessageList
           messages={messages}
           currentTypingId={currentTypingId}
