@@ -1,32 +1,27 @@
-.App {
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #edf1d6;
+}
+
+.voice-box {
   width: 375px;
   height: 100vh;
   background: #edf1d6;
-  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-.container {
-  width: 325px;
-  background: #edf1d6;
-  margin: 0 auto;
+.back-button {
+  margin-top: 20px;
+  margin-left: 20px;
 }
-img#backIcon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-p#question {
-  width: 95px;
-  height: 29px;
-  flex-shrink: 0;
-  color: #000;
-  text-align: center;
-  font-family: Poor Story;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: -0.24px;
-}
-.play {
-  margin-left: 130%;
+
+.toggle-btn {
+  border: none;
+  background-color: #edf1d6;
+  margin-bottom: 10px;
 }
