@@ -7,7 +7,7 @@ function MainView() {
   return (
     <div className="App">
       <div className="container">
-        <img src={mainLogo} />
+        <img className="mainLogo" src={mainLogo} />
         <Link to="/textChat" style={{ textDecoration: 'none' }}>
           <div className="textBox">
             <p className="text">텍스트로 물어보기</p>
