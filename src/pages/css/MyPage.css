@@ -1,0 +1,45 @@
+.App {
+  width: 375px;
+  height: 812px;
+  background: #edf1d6;
+  margin: 0 auto;
+}
+.container {
+  width: 325px;
+  background: #edf1d6;
+  margin: 0 auto;
+}
+img#backIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+p#twoIcon {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+input {
+  width: 260px;
+  height: 56px;
+  padding-left: 10px;
+  flex-shrink: 0;
+  margin-right: 12px;
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: #fffdf2;
+}
+.enter {
+  width: 53px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: #78b17e;
+}
+.enterIcon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
