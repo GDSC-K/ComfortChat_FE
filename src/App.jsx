@@ -6,6 +6,7 @@ import BottomNav from './components/BottomNav';
 import RecentView from './pages/view/recentView';
 import MyPage from './pages/view/MyPage';
 import LoginView from './pages/view/LoginView';
+import SignupView from './pages/view/SignupView';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path="/myPage" element={<MyPage />} />
         {/* <로그인 /> */}
         <Route path="/login" element={<LoginView />} />
+        {/* <회원가입 /> */}
+        <Route path="/signup" element={<SignupView />} />
       </Routes>
     </BrowserRouter>
   );

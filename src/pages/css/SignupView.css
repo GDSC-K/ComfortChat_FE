@@ -37,7 +37,7 @@ p.email {
   border-bottom: 2px solid #000000;
   width: 325px;
 }
-.loginButton {
+.signupButton {
   width: 325px;
   height: 70px;
   flex-shrink: 0;
@@ -54,6 +54,17 @@ p.email {
   line-height: 150%; /* 36px */
   letter-spacing: -0.528px;
 }
-#signup {
-  margin-top: 20px;
+#signupTitle{
+    width: 124px;
+    margin-left: 25px;
+    margin-top:15px;
+height: 38px;
+flex-shrink: 0;
+color: #000;
+font-family: Comfortaa;
+font-size: 30px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: -0.24px;
 }
