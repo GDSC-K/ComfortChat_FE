@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import backIcon from '../../assets/icons/icon-back.png';
+import passIcon from '../../assets/icons/icon-circle-blue.png';
+import failIcon from '../../assets/icons/icon-cross-red.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../css/TextChat.css';
 import axios from 'axios';
@@ -85,6 +87,7 @@ const Message = ({
   id,
   onEndTyping,
   currentTypingId,
+  isOkay,
 }) => {
   return (
     <div className={isUser ? 'user-message' : 'ai-message'}>
@@ -94,9 +97,17 @@ const Message = ({
           <b>AI</b>: {text}
         </p>
       ) : (
-        <p>
-          <b>{isUser ? 'User' : 'AI'}</b>: {text}
-        </p>
+        <div>
+          <p>
+            <b>{isUser ? 'User' : 'AI'}</b>: {text}
+          </p>
+          {isOkay !== undefined && (
+            <img
+              src={isOkay ? passIcon : failIcon}
+              alt={isOkay ? 'Pass' : 'Fail'}
+            />
+          )}
+        </div>
       )}
     </div>
   );
@@ -121,12 +132,13 @@ const MessageForm = ({ onSendMessage }) => {
           },
         },
       );
+      console.log('Full Response:', response);
 
       console.log(response.data.answer);
       setAnswer(response.data.answer);
-      onSendMessage(message, response.data.answer);
+      onSendMessage(message, response.data.answer, response.data.isOkay); // isOkay 값을 전달하도록 수정
     } catch (error) {
-      console.log(error);
+      console.log('Error:', error);
     }
 
     setMessage('');
