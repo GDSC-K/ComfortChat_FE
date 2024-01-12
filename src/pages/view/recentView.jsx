@@ -1,9 +1,8 @@
-import '../css/VoiceChat.css';
+import '../css/recentView.css';
 import backIcon from '../../assets/icons/icon-back.png';
-import playIcon from '../../assets/icons/icon-play.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function VoiceChat() {
+function recentView() {
   return (
     <div className="App">
       <div className="container">
@@ -21,4 +20,4 @@ function VoiceChat() {
   );
 }
 
-export default VoiceChat;
+export default recentView;
