@@ -106,10 +106,11 @@ const MessageForm = ({ onSendMessage }) => {
   const [message, setMessage] = useState('');
   const [answer, setAnswer] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post(
+
+    try {
+      const response = await axios.post(
         'http://ec2-15-164-233-79.ap-northeast-2.compute.amazonaws.com/chats/text',
         {
           question: message,
@@ -119,15 +120,15 @@ const MessageForm = ({ onSendMessage }) => {
             Authorization: '',
           },
         },
-      )
-      .then((res) => {
-        console.log(res.data.answer);
-        setAnswer(res.data.answer);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    onSendMessage(message, answer);
+      );
+
+      console.log(response.data.answer);
+      setAnswer(response.data.answer);
+      onSendMessage(message, response.data.answer);
+    } catch (error) {
+      console.log(error);
+    }
+
     setMessage('');
     setAnswer('');
   };
