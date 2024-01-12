@@ -11,7 +11,6 @@
   height: 100vh;
   background: #edf1d6;
   border-radius: 8px;
-  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.13);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -75,11 +74,7 @@ h1 {
   padding: 20px;
   margin: 0;
 }
-.recentList {
-  width: 325px;
-  height: 59px;
-  flex-shrink: 0;
-  border-radius: 20px;
-  border: 1px solid #000;
-  background: #9dc08b;
+.back-button {
+  margin-top: 20px;
+  margin-left: 20px;
 }

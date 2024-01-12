@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import backIcon from '../../assets/icons/icon-back.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../css/TextChat.css';
+import axios from 'axios';
 
 const TextChat = () => {
   const [messages, setMessages] = useState([]);
   const [currentTypingId, setCurrentTypingId] = useState(null);
 
-  const handleSendMessage = (message) => {
+  const handleSendMessage = (message, answer) => {
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: message, isUser: true },
       {
-        text: `Your message is: "${message}"`,
+        text: `"${answer}"`,
         isUser: false,
         isTyping: true,
         id: Date.now(),
@@ -48,7 +49,11 @@ const TextChat = () => {
   return (
     <div className="App">
       <div className="chat-box">
-        <h1>Comfort Chat</h1>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div className="back-button">
+            <img src={backIcon} />
+          </div>
+        </Link>
         <MessageList
           messages={messages}
           currentTypingId={currentTypingId}
@@ -99,11 +104,33 @@ const Message = ({
 
 const MessageForm = ({ onSendMessage }) => {
   const [message, setMessage] = useState('');
+  const [answer, setAnswer] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSendMessage(message);
+
+    try {
+      const response = await axios.post(
+        'http://ec2-15-164-233-79.ap-northeast-2.compute.amazonaws.com/chats/text',
+        {
+          question: message,
+        },
+        {
+          headers: {
+            Authorization: '',
+          },
+        },
+      );
+
+      console.log(response.data.answer);
+      setAnswer(response.data.answer);
+      onSendMessage(message, response.data.answer);
+    } catch (error) {
+      console.log(error);
+    }
+
     setMessage('');
+    setAnswer('');
   };
 
   return (
