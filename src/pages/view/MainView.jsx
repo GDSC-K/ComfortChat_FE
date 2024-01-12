@@ -18,8 +18,8 @@ function MainView() {
             <p className="voice">음성으로 물어보기</p>
           </div>
         </Link>
-        <BottomNav />
       </div>
+      <BottomNav />
     </div>
   );
 }
