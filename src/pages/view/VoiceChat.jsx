@@ -1,109 +1,118 @@
 import '../css/VoiceChat.css';
-import React, { useState, useCallback } from 'react';
+import backIcon from '../../assets/icons/icon-back.png';
+import PlayIcon from '../../assets/icons/icon-play.png';
+import PauseIcon from '../../assets/icons/icon-pause.png';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
-function VoiceChat() {
+const VoiceChat = () => {
   const [stream, setStream] = useState();
   const [media, setMedia] = useState();
-  const [onRec, setOnRec] = useState(true);
   const [source, setSource] = useState();
   const [analyser, setAnalyser] = useState();
   const [audioUrl, setAudioUrl] = useState();
-  const [disabled, setDisabled] = useState(true);
-  const onRecAudio = () => {
-    setDisabled(true);
+  const [recording, setRecording] = useState(false);
+  const [messages, setMessages] = useState([]);
 
-    // 음원정보를 담은 노드를 생성하거나 음원을 실행또는 디코딩 시키는 일을 한다
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    // 자바스크립트를 통해 음원의 진행상태에 직접접근에 사용된다.
-    const analyser = audioCtx.createScriptProcessor(0, 1, 1);
-    setAnalyser(analyser);
+  const toggleRecording = () => {
+    if (!recording) {
+      // Start recording
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const newAnalyser = audioCtx.createScriptProcessor(0, 1, 1);
+      setAnalyser(newAnalyser);
 
-    function makeSound(stream) {
-      // 내 컴퓨터의 마이크나 다른 소스를 통해 발생한 오디오 스트림의 정보를 보여준다.
-      const source = audioCtx.createMediaStreamSource(stream);
-      setSource(source);
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-    }
-    // 마이크 사용 권한 획득
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorder.start();
-      setStream(stream);
-      setMedia(mediaRecorder);
-      makeSound(stream);
+      function makeSound(newStream) {
+        const newSource = audioCtx.createMediaStreamSource(newStream);
+        setSource(newSource);
+        newSource.connect(newAnalyser);
+        newAnalyser.connect(audioCtx.destination);
+      }
 
-      analyser.onaudioprocess = function (e) {
-        // 3분(180초) 지나면 자동으로 음성 저장 및 녹음 중지
-        if (e.playbackTime > 180) {
-          stream.getAudioTracks().forEach(function (track) {
-            track.stop();
-          });
-          mediaRecorder.stop();
-          // 메서드가 호출 된 노드 연결 해제
-          analyser.disconnect();
-          audioCtx.createMediaStreamSource(stream).disconnect();
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((newStream) => {
+        const newMediaRecorder = new MediaRecorder(newStream);
+        newMediaRecorder.start();
+        setStream(newStream);
+        setMedia(newMediaRecorder);
+        makeSound(newStream);
 
-          mediaRecorder.ondataavailable = function (e) {
-            setAudioUrl(e.data);
-            setOnRec(true);
-          };
-        } else {
-          setOnRec(false);
-        }
+        newAnalyser.onaudioprocess = function (e) {
+          if (e.playbackTime > 180) {
+            newStream.getAudioTracks().forEach(function (track) {
+              track.stop();
+            });
+            newMediaRecorder.stop();
+            newAnalyser.disconnect();
+            audioCtx.createMediaStreamSource(newStream).disconnect();
+
+            newMediaRecorder.ondataavailable = function (e) {
+              setAudioUrl(e.data);
+              setRecording(false);
+              sendVoiceToAPI(e.data);
+            };
+          } else {
+            setRecording(true);
+          }
+        };
+      });
+    } else {
+      // Stop recording
+      media.ondataavailable = function (e) {
+        setAudioUrl(e.data);
+        setRecording(false);
+
+        sendVoiceToAPI(e.data);
       };
-    });
-  };
 
-  // 사용자가 음성 녹음을 중지 했을 때
-  const offRecAudio = () => {
-    // dataavailable 이벤트로 Blob 데이터에 대한 응답을 받을 수 있음
-    media.ondataavailable = function (e) {
-      setAudioUrl(e.data);
-      setOnRec(true);
-    };
+      stream.getAudioTracks().forEach(function (track) {
+        track.stop();
+      });
 
-    // 모든 트랙에서 stop()을 호출해 오디오 스트림을 정지
-    stream.getAudioTracks().forEach(function (track) {
-      track.stop();
-    });
+      media.stop();
 
-    // 미디어 캡처 중지
-    media.stop();
-
-    // 메서드가 호출 된 노드 연결 해제
-    analyser.disconnect();
-    source.disconnect();
-
-    if (audioUrl) {
-      URL.createObjectURL(audioUrl); // 출력된 링크에서 녹음된 오디오 확인 가능
+      analyser.disconnect();
+      source.disconnect();
     }
-
-    // File 생성자를 사용해 파일로 변환
-    const sound = new File([audioUrl], 'soundBlob.mp3', {
-      lastModified: new Date().getTime(),
-      type: 'audio/mp3',
-    });
-
-    setDisabled(false);
-    console.log(sound); // File 정보 출력
   };
 
-  const play = () => {
-    const audio = new Audio(URL.createObjectURL(audioUrl));
-    audio.loop = false;
-    audio.volume = 1;
-    audio.play();
+  const sendVoiceToAPI = (voiceData) => {
+    const responseMessage = 'AI가 응답한 메시지';
+    setMessages((prevMessages) => [...prevMessages, responseMessage]);
   };
 
   return (
-    <>
-      <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
-      <button onClick={play} disabled={disabled}>
-        재생
-      </button>
-    </>
+    <div className="App">
+      <div className="voice-box">
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div className="back-button">
+            <img src={backIcon} alt="Back" />
+          </div>
+        </Link>
+        <MessageList messages={messages} />
+        <button className="toggle-btn" onClick={toggleRecording}>
+          <img
+            src={recording ? PauseIcon : PlayIcon}
+            alt={recording ? 'Stop' : 'Record'}
+          />
+        </button>
+      </div>
+    </div>
   );
-}
+};
+
+const MessageList = ({ messages }) => (
+  <div className="messages-list">
+    {messages.map((message, index) => (
+      <Message key={index} text={message} />
+    ))}
+  </div>
+);
+
+const Message = ({ text }) => (
+  <div className="ai-message">
+    <p>
+      <b>AI</b>: {text}
+    </p>
+  </div>
+);
 
 export default VoiceChat;
