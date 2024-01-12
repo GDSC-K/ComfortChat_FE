@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import backIcon from '../../assets/icons/icon-back.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import '../css/TextChat.css';
+import axios from 'axios';
 
 const TextChat = () => {
   const [messages, setMessages] = useState([]);
   const [currentTypingId, setCurrentTypingId] = useState(null);
 
-  const handleSendMessage = (message) => {
+  const handleSendMessage = (message, answer) => {
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: message, isUser: true },
       {
-        text: `Your message is: "${message}"`,
+        text: `"${answer}"`,
         isUser: false,
         isTyping: true,
         id: Date.now(),
@@ -103,11 +104,32 @@ const Message = ({
 
 const MessageForm = ({ onSendMessage }) => {
   const [message, setMessage] = useState('');
+  const [answer, setAnswer] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSendMessage(message);
+    axios
+      .post(
+        'http://ec2-15-164-233-79.ap-northeast-2.compute.amazonaws.com/chats/text',
+        {
+          question: message,
+        },
+        {
+          headers: {
+            Authorization: '',
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res.data.answer);
+        setAnswer(res.data.answer);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    onSendMessage(message, answer);
     setMessage('');
+    setAnswer('');
   };
 
   return (
