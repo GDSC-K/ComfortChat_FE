@@ -2,7 +2,12 @@ import './App.css';
 
 function App() {
   return (
-    <h1>Hello, Comfort Chat</h1>
+    <div class="container">
+      <img src="" >
+        <div class="text">
+          
+        </div>
+    </div>
   );
 }
 
