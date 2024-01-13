@@ -124,10 +124,18 @@ function VoiceChat() {
     audio.play();
   };
 
-  const sendVoiceToAPI = (voiceData) => {
-    const responseMessage =
-      'AI: "안전상의 이유로 페트병을 전자레인지에 넣는 것은 권장되지 않습니다. 페트병은 전자레인지에 사용되지 않도록 되어 있고, 또한 고온에 노출될 경우 유해한 물질이 발생할 수 있습니다. 따라서 페트병을 전자레인지에 넣지 않는 것이 좋습니다."';
-    setMessages((prevMessages) => [...prevMessages, responseMessage]);
+  const sendVoiceToAPI = async () => {
+    try {
+      // API 호출 후 1초의 딜레이를 두고 메세지를 나타냄
+      setTimeout(() => {
+        const responseMessage =
+          '"안전상의 이유로 페트병을 전자레인지에 넣는 것은 권장되지 않습니다. 페트병은 전자레인지에 사용되지 않도록 되어 있고, 또한 고온에 노출될 경우 유해한 물질이 발생할 수 있습니다. 따라서 페트병을 전자레인지에 넣지 않는 것이 좋습니다."';
+        setMessages((prevMessages) => [...prevMessages, responseMessage]);
+      }, 1000);
+    } catch (error) {
+      console.error('오류 발생:', error);
+      // 오류 처리 로직 추가
+    }
   };
 
   // 😀😀😀
@@ -141,11 +149,9 @@ function VoiceChat() {
         </Link>
         <MessageList messages={messages} />
         <button
-          className="Voice-btn"
+          className={`Voice-btn ${onRec ? 'recording' : 'not-recording'}`}
           onClick={onRec ? onRecAudio : offRecAudio}
-        >
-          녹음
-        </button>
+        ></button>
         <button className="Play-btn" onClick={play} disabled={disabled}>
           재생
         </button>
