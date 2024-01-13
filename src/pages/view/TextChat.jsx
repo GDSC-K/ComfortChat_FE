@@ -98,15 +98,15 @@ const Message = ({
         </p>
       ) : (
         <div>
+          {!isUser && (
+            // AI의 메시지에만 아이콘을 표시
+            <div className="cross">
+              <img src={failIcon} alt="Fail" />
+            </div>
+          )}
           <p>
             <b>{isUser ? 'User' : 'AI'}</b>: {text}
           </p>
-          {isOkay !== undefined && (
-            <img
-              src={isOkay ? passIcon : failIcon}
-              alt={isOkay ? 'Pass' : 'Fail'}
-            />
-          )}
         </div>
       )}
     </div>
@@ -135,6 +135,7 @@ const MessageForm = ({ onSendMessage }) => {
       console.log('Full Response:', response);
 
       console.log(response.data.answer);
+      console.log('isOkay Status: ', response.data.isOkay);
       setAnswer(response.data.answer);
       onSendMessage(message, response.data.answer, response.data.isOkay); // isOkay 값을 전달하도록 수정
     } catch (error) {
