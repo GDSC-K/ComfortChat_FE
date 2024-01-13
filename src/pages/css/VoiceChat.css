@@ -21,11 +21,26 @@
 }
 
 .Voice-btn {
-  height: 40px;
+  height: 80px;
   border: none;
   background-color: #edf1d6;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
+
+.Voice-btn.recording {
+  /* 녹음 중일 때의 스타일 */
+  background-image: url('../../assets/icons/icon-play.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.Voice-btn.not-recording {
+  /* 녹음 중일 때의 스타일 */
+  background-image: url('../../assets/icons/icon-pause.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .Play-btn {
   height: 30px;
 }
