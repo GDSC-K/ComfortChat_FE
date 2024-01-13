@@ -4,6 +4,7 @@ import { getCookieToken } from '../../storage/Cookie';
 import backIcon from '../../assets/icons/icon-back.png';
 import PlayIcon from '../../assets/icons/icon-play.png';
 import PauseIcon from '../../assets/icons/icon-pause.png';
+import failIcon from '../../assets/icons/icon-cross-red.png';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function VoiceChat() {
@@ -163,6 +164,9 @@ const MessageList = ({ messages }) => (
 
 const Message = ({ text }) => (
   <div className="ai-message">
+    <div className="cross">
+      <img src={failIcon} alt="Fail" />
+    </div>
     <p>
       <b>AI</b>: {text}
     </p>
