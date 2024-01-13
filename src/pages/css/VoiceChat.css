@@ -21,7 +21,11 @@
 }
 
 .Voice-btn {
+  height: 40px;
   border: none;
   background-color: #edf1d6;
   margin-bottom: 10px;
+}
+.Play-btn {
+  height: 30px;
 }
